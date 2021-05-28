@@ -90,7 +90,8 @@ The script can be found in [Custom_deepseg.ipynb](https://github.com/nidebroux/l
 
 ## Contributors
 This project has been developed by Nikita de Broux during his Master Thesis.
-It is greatly inspired from an existing github repository. The contributors of it can be found here (https://github.com/sct-pipeline/deepseg-training/graphs/contributors)
+
+It is greatly inspired from an existing github repository. The contributors of it can be found [here](https://github.com/sct-pipeline/deepseg-training/graphs/contributors).
 
 
 
