@@ -46,7 +46,7 @@ So, we need 1) SC detection model 2) cropping the image around SC 3) segmentatio
 
 This is explained in the paper Gros et al, 2018 (https://arxiv.org/pdf/1805.06349.pdf).
 
-The step-by-step procedure is described in [Preprocessing_script.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/scripts/Preprocessing_script.ipynb).
+The step-by-step procedure is described in [Preprocessing_script.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/Preprocessing_script.ipynb).
 
 
 The following bullet points would help to understand. First as it is mentioned before, we need to narrow our search area around the spinal cord. So, for that we need to find spinal cord centerline. It's done by using the following command from Spinal cord toolbox :
