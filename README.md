@@ -84,7 +84,7 @@ Files that are necessary for fine-tuning are:
 
 The last script stands simply for the segmentation of data not used during the training with our new fine-tuned model.
 
-The script can be found in [Custom_deepseg.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/scripts/Custom_deepseg.ipynb)
+The script can be found in [Custom_deepseg.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/Custom_deepseg.ipynb)
 
 ## Contributors
 This project has been developed by Nikita de Broux during his Master Thesis.
