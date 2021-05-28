@@ -14,7 +14,7 @@ The pipeline presented here has been created in the context of a Master thesis a
 The role of this pipeline is to fine-tune the existing deepseg model with lumbosacral MR images such that we obtain a more robust model for the lumbosacral spinal cord segmentation. The pipeline could be used for other kind of fine-tuning with appropriate training data.
 
 Our pipeline uses a modified version of the Spinal Cord Toolbox such that it work on Python 3.7 with Tensorflow 2.2 and Keras 2.4.3. In addition there are modifications in `sct_deepseg_sc` such that it can use our fine-tuned model. The modification done to the SCT concerning the adaptation to Python 3.7 can be found here (https://github.com/spinalcordtoolbox/spinalcordtoolbox/pull/3361/files) with very slightly modification in `requirements.txt` to use to good versions of Keras and Tensorflow.
-The modification concerning the segmentation consists in the addition of a new boolean parameter "custom" which indicates wheter or not the segmentation need to use the fine-tuned model. Unfortunately the adapted version of SCT is too heavy to be posted in this repository. Please send a private message to nidebroux (my github profile) to obtain a zip version of `sct_custom` if necessary.
+The modification concerning the segmentation consists in the addition of a new boolean parameter "custom" which indicates wheter or not the segmentation need to use the fine-tuned model. Unfortunately the adapted version of SCT is too heavy to be posted in this repository. Please send my an e-mail (nikita.debroux@student.uclouvain.be) to obtain a zip version of `sct_custom` if necessary.
 
 To get start, you need to have data that consists of input image and its corresponding segmentation masks, both in NIFTI format.
 
