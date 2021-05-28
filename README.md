@@ -7,7 +7,7 @@ Pipeline for training new models with deepseg_sc
 - [Contributors](#contributors)
 - [License](#license)
 
-The pipeline presented here has been created in the context of a Master thesis at Ecole Polytechnique de Louvain. The subject of the thesis is "Automatic segmentation of the lumbosacral spinal cord". The pipeline is greatly inspired by an existing github [repository](https://github.com/sct-pipeline/deepseg-training) treating a similar subject (retraining for lesion detection). 
+The pipeline presented here has been created in the context of a Master thesis at Ecole Polytechnique de Louvain. The subject of the thesis is "Automatic segmentation of the lumbosacral spinal cord". The pipeline is greatly inspired by an [existing github repository](https://github.com/sct-pipeline/deepseg-training) treating a similar subject (retraining for lesion detection). 
 
 `sct_deepseg_sc` is a deep learning based function that segments spinal cord human interventions. For more information please see the [article](https://arxiv.org/pdf/1805.06349.pdf). The model distributed with Spinal Cord Toolbox (SCT) was trained on a large dataset (more than 1000 MR images). Unfortunately the majority of those images do not cover the whole spinal cord. The model may thus have difficulties to correctly segment the end of the spinal cord (the lumbosacral part).
 
