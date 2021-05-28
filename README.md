@@ -1,4 +1,4 @@
-# lumbosacral-segmentation
+# lumbosacral segmentation
 Pipeline for training new models with deepseg_sc
 
 - [Pre-processing](#pre-processing)
@@ -9,11 +9,12 @@ Pipeline for training new models with deepseg_sc
 
 The pipeline presented here has been created in the context of a Master thesis at Ecole Polytechnique de Louvain. The subject of the thesis is "Automatic segmentation of the lumbosacral spinal cord". The pipeline is greatly inspired by an existing github repository (https://github.com/sct-pipeline/deepseg-training) treating a similar subject (retraining for lesion detection). 
 
-`sct_deepseg_sc` is a deep learning based function that segments spinal cord human interventions. For more information please see the [article](https://arxiv.org/pdf/1805.06349.pdf). The model distributed with SCT was trained on a large dataset (more than 1000 MR images). Unfortunately the majority of those images do not cover the whole spinal cord. The model may thus have difficulties to correctly segment the end of the spinal cord (the lumbosacral part).
+`sct_deepseg_sc` is a deep learning based function that segments spinal cord human interventions. For more information please see the [article](https://arxiv.org/pdf/1805.06349.pdf). The model distributed with Spinal Cord Toolbox (SCT) was trained on a large dataset (more than 1000 MR images). Unfortunately the majority of those images do not cover the whole spinal cord. The model may thus have difficulties to correctly segment the end of the spinal cord (the lumbosacral part).
 
-Our pipeline uses a modified version of the Spinal Cord Toolbox such that it work on Python 3.7 with Tensorflow 2.2 and Keras 2.4.3. In addition there are modifications in `sct_deepseg_sc` such that it can use our fine-tuned model.
+The role of this pipeline is to fine-tune the existing deepseg model with lumbosacral MR images such that we obtain a more robust model for the lumbosacral spinal cord segmentation. The pipeline could be used for other kind of fine-tuning with appropriate training data.
 
-The role of this pipeline is thus to fine-tuned the existing deepseg model with lumbosacral MR images such that we obtain a more robust model for the lumbosacral spinal cord segmentation. The pipeline could be used for other kind of fine-tuning with appropriate training data.
+Our pipeline uses a modified version of the Spinal Cord Toolbox such that it work on Python 3.7 with Tensorflow 2.2 and Keras 2.4.3. In addition there are modifications in `sct_deepseg_sc` such that it can use our fine-tuned model. The modification done to the SCT concerning the adaptation to Python 3.7 can be found here (https://github.com/spinalcordtoolbox/spinalcordtoolbox/pull/3361/files) with very slightly modification in `requirements.txt` to use to good versions of Keras and Tensorflow.
+The modification concerning the segmentation consists in the addition of a new boolean parameter "custom" which indicates wheter or not the segmentation need to use the fine-tuned model. Unfortunately the adapted version of SCT is too heavy to be posted in this repository. Please send a private message to nidebroux (my github profile) to obtain a zip version of `sct_custom` if necessary.
 
 To get start, you need to have data that consists of input image and its corresponding segmentation masks, both in NIFTI format.
 
@@ -45,7 +46,7 @@ So, we need 1) SC detection model 2) cropping the image around SC 3) segmentatio
 
 This is explained in the paper Gros et al, 2018 (https://arxiv.org/pdf/1805.06349.pdf).
 
-The step-by-step procedure is described in [Preprocessing_script.ipynb](https://github.com/sct-pipeline/deepseg-training/blob/master/Scripts/Preprocessing_script.ipynb).
+The step-by-step procedure is described in [Preprocessing_script.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/scripts/Preprocessing_script.ipynb).
 
 
 The following bullet points would help to understand. First as it is mentioned before, we need to narrow our search area around the spinal cord. So, for that we need to find spinal cord centerline. It's done by using the following command from Spinal cord toolbox :
@@ -73,17 +74,17 @@ The prepocessing will finally arrange the data such that it can be used in the f
 
 ## Fine-tuning
 Files that are necessary for fine-tuning are:
-- [config_file.py](https://github.com/sct-pipeline/deepseg-training/blob/master/Scripts/config_file.py): Global parameters. They need to be changed according to the need.
-- [generator.py](https://github.com/sct-pipeline/deepseg-training/blob/master/Scripts/generator.py): Define data augmentation (e.g., flipping, distorting).
-- [utils.py](https://github.com/sct-pipeline/deepseg-training/blob/master/Scripts/utils.py): Collection of functions that are called in the main script. E.g.: extracting 3D patches.
-- [Main_file.ipynb](https://github.com/sct-pipeline/deepseg-training/blob/master/Scripts/Main_file.ipynb): Notebook to fine-tune the network with new dataset. It contains also a serie of tests in order to find the best parameters possible for the fine-tuning.
+- [config_file.py](https://github.com/nidebroux/lumbosacral_segmentation/scripts/config_file.py): Global parameters. They need to be changed according to the need.
+- [generator.py](https://github.com/nidebroux/lumbosacral_segmentation/scripts/generator.py): Define data augmentation (e.g., flipping, distorting).
+- [utils.py](https://github.com/nidebroux/lumbosacral_segmentation/scripts/utils.py): Collection of functions that are called in the main script. E.g.: extracting 3D patches.
+- [Main_file.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/scripts/Main_file.ipynb): Notebook to fine-tune the network with new dataset. It contains also a serie of tests in order to find the best parameters possible for the fine-tuning.
 
 
 ## Prediction
 
 The last script stands simply for the segmentation of data not used during the training with our new fine-tuned model.
 
-The script can be found in [Custom_deepseg.ipynb]()
+The script can be found in [Custom_deepseg.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/scripts/Custom_deepseg.ipynb)
 
 ## Contributors
 This project has been developed by Nikita de Broux during his Master Thesis.
