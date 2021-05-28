@@ -74,10 +74,10 @@ The prepocessing will finally arrange the data such that it can be used in the f
 
 ## Fine-tuning
 Files that are necessary for fine-tuning are:
-- [config_file.py](https://github.com/nidebroux/lumbosacral_segmentation/scripts/config_file.py): Global parameters. They need to be changed according to the need.
-- [generator.py](https://github.com/nidebroux/lumbosacral_segmentation/scripts/generator.py): Define data augmentation (e.g., flipping, distorting).
-- [utils.py](https://github.com/nidebroux/lumbosacral_segmentation/scripts/utils.py): Collection of functions that are called in the main script. E.g.: extracting 3D patches.
-- [Main_file.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/scripts/Main_file.ipynb): Notebook to fine-tune the network with new dataset. It contains also a serie of tests in order to find the best parameters possible for the fine-tuning.
+- [config_file.py](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/config_file.py): Global parameters. They need to be changed according to the need.
+- [generator.py](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/generator.py): Define data augmentation (e.g., flipping, distorting).
+- [utils.py](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/utils.py): Collection of functions that are called in the main script. E.g.: extracting 3D patches.
+- [Main_file.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/Main_file.ipynb): Notebook to fine-tune the network with new dataset. It contains also a serie of tests in order to find the best parameters possible for the fine-tuning.
 
 
 ## Prediction
