@@ -2,7 +2,7 @@ import os
 
 config = dict()
 config["patch_size"] = (64,64, 48)  # Size of the patches to extract
-config["patch_overlap"] = 6  # Size of the overlap between the extracted patches along the third dimension
+config["patch_overlap"] = 3  # Size of the overlap between the extracted patches along the third dimension
 config["batch_size"] = 5  # Size of the batches that the generator will provide
 config["n_epochs_1"] = 75 # Total number of epochs to train the model at first training
 config["n_epochs_2"] = 75 # Total number of epochs to train the model at second training
