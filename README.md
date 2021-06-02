@@ -7,14 +7,16 @@ Pipeline for training new models with deepseg_sc
 - [Contributors](#contributors)
 - [License](#license)
 
-The pipeline presented here has been created in the context of a Master thesis at Ecole Polytechnique de Louvain. The subject of the thesis is "Automatic segmentation of the lumbosacral spinal cord". The pipeline is greatly inspired by an existing github repository (https://github.com/sct-pipeline/deepseg-training) treating a similar subject (retraining for lesion detection). 
+The pipeline presented here has been created in the context of a Master thesis at Ecole Polytechnique de Louvain. The subject of the thesis is "Automatic segmentation of the lumbosacral spinal cord". The pipeline is greatly inspired by an [existing github repository](https://github.com/sct-pipeline/deepseg-training) treating a similar subject (retraining for lesion detection). 
 
 `sct_deepseg_sc` is a deep learning based function that segments spinal cord human interventions. For more information please see the [article](https://arxiv.org/pdf/1805.06349.pdf). The model distributed with Spinal Cord Toolbox (SCT) was trained on a large dataset (more than 1000 MR images). Unfortunately the majority of those images do not cover the whole spinal cord. The model may thus have difficulties to correctly segment the end of the spinal cord (the lumbosacral part).
 
 The role of this pipeline is to fine-tune the existing deepseg model with lumbosacral MR images such that we obtain a more robust model for the lumbosacral spinal cord segmentation. The pipeline could be used for other kind of fine-tuning with appropriate training data.
 
-Our pipeline uses a modified version of the Spinal Cord Toolbox such that it work on Python 3.7 with Tensorflow 2.2 and Keras 2.4.3. In addition there are modifications in `sct_deepseg_sc` such that it can use our fine-tuned model. The modification done to the SCT concerning the adaptation to Python 3.7 can be found here (https://github.com/spinalcordtoolbox/spinalcordtoolbox/pull/3361/files) with very slightly modification in `requirements.txt` to use to good versions of Keras and Tensorflow.
-The modification concerning the segmentation consists in the addition of a new boolean parameter "custom" which indicates wheter or not the segmentation need to use the fine-tuned model. Unfortunately the adapted version of SCT is too heavy to be posted in this repository. Please send my an e-mail (nikita.debroux@student.uclouvain.be) to obtain a zip version of `sct_custom` if necessary.
+Our pipeline uses a modified version of the Spinal Cord Toolbox such that it work on Python 3.7 with Tensorflow 2.2 and Keras 2.4.3. In addition there are modifications in `sct_deepseg_sc` such that it can use our fine-tuned model. The modification done to the SCT concerning the adaptation to Python 3.7 can be found [here](https://github.com/spinalcordtoolbox/spinalcordtoolbox/pull/3361/files) with very slightly modification in `requirements.txt` to use to good versions of Keras and Tensorflow.
+The modification concerning the segmentation consists in the addition of a new boolean parameter "custom"  which indicates wheter or not the segmentation need to use the fine-tuned model. Do not use the custom option until you have fine-tuned a model on your own it will not work.
+
+This adapted version of the SCT can be installed via the folder `sct_custom`. Note that the README file of the SCT has NOT been adapted. Installation instruction remains exactly the same (run the command `./install_sct` when you are in the `sct_custom` folder). Errors or warnings may occurs  during installation but it will not be an issue for the good behavior of the fine-tuning pipeline. Note that this version of SCT is only designed for this pipeline and should not be used for anything else. 
 
 To get start, you need to have data that consists of input image and its corresponding segmentation masks, both in NIFTI format.
 
@@ -88,7 +90,8 @@ The script can be found in [Custom_deepseg.ipynb](https://github.com/nidebroux/l
 
 ## Contributors
 This project has been developed by Nikita de Broux during his Master Thesis.
-It is greatly inspired from an existing github repository. The contributors of it can be found here (https://github.com/sct-pipeline/deepseg-training/graphs/contributors)
+
+It is greatly inspired from an existing github repository. The contributors of it can be found [here](https://github.com/sct-pipeline/deepseg-training/graphs/contributors).
 
 
 
