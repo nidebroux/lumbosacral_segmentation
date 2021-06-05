@@ -77,45 +77,46 @@ def load_3Dpatches(fname_lst, patch_shape, overlap=None):
         print(fname[0])
         if os.path.isfile(fname[0]) and os.path.isfile(fname[1]):
             im, gt = Image(fname[0]), Image(fname[1])
-            im_data, gt_data = im.data.astype(np.float32), gt.data.astype(np.int8)
-            if 1 in gt_data:
-                
+            gt_data = np.round(gt.data)
+            im_data, gt_data = im.data.astype(np.float32), gt_data.astype(np.int32)
 
-                z_max = im_data.shape[2]
 
-                z_step_keep = range(0, z_max, z_size)
-                z_data_crop_max = max(z_step_keep) + z_size
 
-                im_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
-                gt_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
+            z_max = im_data.shape[2]
 
-                im_data_crop[:, :, :z_max] = im_data
-                gt_data_crop[:, :, :z_max] = gt_data
-                
+            z_step_keep = range(0, z_max, z_size)
+            z_data_crop_max = max(z_step_keep) + z_size
 
-               # z_max = im_data.shape[1]
+            im_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
+            gt_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
 
-                #z_step_keep = range(0, z_max, z_size)
-                #z_data_crop_max = max(z_step_keep) + z_size
+            im_data_crop[:, :, :z_max] = im_data
+            gt_data_crop[:, :, :z_max] = gt_data
 
-                #im_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
-                #gt_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
-                
-               # print x_size,y_size,z_data_crop_max,z_max
-                #print gt_data_crop
 
-                #im_data_crop[:, :, :z_max] = im_data[:,:,:48]
-                #gt_data_crop[:, :, :z_max] = gt_data[:,:,:48]
+           # z_max = im_data.shape[1]
 
-                
-                #print(im_data_crop.shape)
+            #z_step_keep = range(0, z_max, z_size)
+            #z_data_crop_max = max(z_step_keep) + z_size
 
-                z_step_keep = range(0, z_max, overlap) if overlap else range(0, z_max, z_size)
-                for zz in z_step_keep:
-                    if im_data_crop[:, :, zz:zz+z_size].shape[2] == z_size:
-                        #print(im_data_crop.shape)
-                        X.append(im_data_crop[:, :, zz:zz+z_size])
-                        y.append(gt_data_crop[:, :, zz:zz+z_size])
+            #im_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
+            #gt_data_crop = np.zeros((x_size, y_size, z_data_crop_max))
+
+           # print x_size,y_size,z_data_crop_max,z_max
+            #print gt_data_crop
+
+            #im_data_crop[:, :, :z_max] = im_data[:,:,:48]
+            #gt_data_crop[:, :, :z_max] = gt_data[:,:,:48]
+
+
+            #print(im_data_crop.shape)
+
+            z_step_keep = range(0, z_max, overlap) if overlap else range(0, z_max, z_size)
+            for zz in z_step_keep:
+                if im_data_crop[:, :, zz:zz+z_size].shape[2] == z_size:
+                    #print(im_data_crop.shape)
+                    X.append(im_data_crop[:, :, zz:zz+z_size])
+                    y.append(gt_data_crop[:, :, zz:zz+z_size])
 
     return np.expand_dims(np.array(X), axis=1), np.expand_dims(np.array(y), axis=1)
 
