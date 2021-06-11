@@ -1,4 +1,4 @@
-# lumbosacral segmentation
+# Lumbosacral spinal cord segmentation
 Pipeline for training new models with deepseg_sc
 
 - [Pre-processing](#pre-processing)
