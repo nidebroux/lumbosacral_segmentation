@@ -63,10 +63,11 @@ Then, resolution should be set to 0.5mm isotropic for all images masks:
 sct_resample -i IMAGE -mm 0.5x0.5
 ~~~
 
-~~~
-sct_get_centerline
-~~~
 In order to have the best centerline detection we use the segmentation mask. By computing the center of mass on each slice of the segmentation we obtain the best centerline detection possible.
+
+~~~
+sct_get_centerline -i MASK
+~~~
 
 Next step consists in cropping the resampled image and mask around the spinal cord centerline.
 
