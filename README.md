@@ -50,7 +50,7 @@ This is explained in the paper Gros et al, 2018 (https://arxiv.org/pdf/1805.0634
 
 The step-by-step procedure is described in [Preprocessing_script.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/Preprocessing_script.ipynb).
 
-The following bullet points resume the procedure.
+The following points resume the procedure.
 
 Since, the orientation of the images could vary across datasets/centers, we need to systematically set the orientation of the input image and mask to Right-Left, Posterior-Anterior, Inferior-Superior (RPI):
 
@@ -60,10 +60,13 @@ sct_image -i IMAGE -set-orient RPI
 
 Then, resolution should be set to 0.5mm isotropic for all images masks:
 ~~~
-sct_resample -i IMAGE -mm 0.5x0.5x0.5
+sct_resample -i IMAGE -mm 0.5x0.5
 ~~~
 
-- `sct_get_centerline`:   In order to have the best centerline detection we use the segmentation mask. By computing the center of mass on each slice of the segmentation we obtain the best centerline detection possible.
+~~~
+sct_get_centerline
+~~~
+In order to have the best centerline detection we use the segmentation mask. By computing the center of mass on each slice of the segmentation we obtain the best centerline detection possible.
 
 Next step consists in cropping the resampled image and mask around the spinal cord centerline.
 
