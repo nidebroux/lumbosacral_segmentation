@@ -40,7 +40,7 @@ data_mask/mask/Sub00N_contrast00N_seg.nii
 ~~~
 
 
-## Pre-processing
+## Preprocessing
 
 It is believed that instead of trying to segment in the whole image, narrowing our search area in small zone the spinal cord (SC) will improve the segmentation. To do that, in simple words, first we need to find the centerline of the spinal cord from input image using SC detection algorithm and crop the input image around SC then using segmentation algorithm to detect the spinal cord.
 
