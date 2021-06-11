@@ -87,7 +87,7 @@ Files that are necessary for fine-tuning are:
 
 ## Prediction
 
-The last script stands simply for the segmentation of data not used during the training with our new fine-tuned model.
+The last script stands for the segmentation of data not used during the training with our new fine-tuned model incorporated in the complete `deepseg` framework.
 
 The script can be found in [Custom_deepseg.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/Custom_deepseg.ipynb)
 
