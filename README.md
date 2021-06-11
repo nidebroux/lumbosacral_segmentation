@@ -9,16 +9,16 @@ Pipeline for training new models with deepseg_sc
 
 The pipeline presented here has been created in the context of a Master thesis at Ecole Polytechnique de Louvain. The subject of the thesis is "Automatic segmentation of the lumbosacral spinal cord". The pipeline is greatly inspired by an [existing github repository](https://github.com/sct-pipeline/deepseg-training) treating a similar subject (retraining for lesion detection). 
 
-`sct_deepseg_sc` is a deep learning based function that segments spinal cord human interventions. For more information please see the [article](https://arxiv.org/pdf/1805.06349.pdf). The model distributed with Spinal Cord Toolbox (SCT) was trained on a large dataset (more than 1000 MR images). Unfortunately the majority of those images do not cover the whole spinal cord. The model may thus have difficulties to correctly segment the end of the spinal cord (the lumbosacral part).
+`sct_deepseg_sc` is a deep learning based function that automatically segments spinal cord. For more information please see the [article](https://arxiv.org/pdf/1805.06349.pdf). The models distributed with Spinal Cord Toolbox (SCT) were trained on a large dataset (more than 1000 MR images). Unfortunately the majority of those images does not cover the entire spinal cord. The models may thus have difficulties to correctly segment the end of the spinal cord (the lumbosacral part).
 
-The role of this pipeline is to fine-tune the existing deepseg model with lumbosacral MR images such that we obtain a more robust model for the lumbosacral spinal cord segmentation. The pipeline could be used for other kind of fine-tuning with appropriate training data.
+The role of this pipeline is to fine-tune the existing deepseg segmentation model with lumbosacral MR images such that we obtain a more robust model for the lumbosacral spinal cord segmentation. The pipeline could be used for other kind of fine-tuning with appropriate training data.
 
 Our pipeline uses a modified version of the Spinal Cord Toolbox such that it work on Python 3.7 with Tensorflow 2.2 and Keras 2.4.3. In addition there are modifications in `sct_deepseg_sc` such that it can use our fine-tuned model. The modification done to the SCT concerning the adaptation to Python 3.7 can be found [here](https://github.com/spinalcordtoolbox/spinalcordtoolbox/pull/3361/files) with very slightly modification in `requirements.txt` to use to good versions of Keras and Tensorflow.
-The modification concerning the segmentation consists in the addition of a new boolean parameter "custom"  which indicates wheter or not the segmentation need to use the fine-tuned model. Do not use the custom option until you have fine-tuned a model on your own it will not work.
+The modification concerning the segmentation consists in the addition of a new boolean parameter `custom` which indicates wheter or not the segmentation need to use the fine-tuned model. Do not use the custom option until you have fine-tuned a model on your own it will not work.
 
-This adapted version of the SCT can be installed via the folder `sct_custom`. Note that the README file of the SCT has NOT been adapted. Installation instruction remains exactly the same (run the command `./install_sct` when you are in the `sct_custom` folder). Errors or warnings may occurs  during installation but it will not be an issue for the good behavior of the fine-tuning pipeline. Note that this version of SCT is only designed for this pipeline and should not be used for anything else. 
+This adapted version of the SCT can be installed via the folder `sct_custom`. Note that the README file of the SCT has NOT been adapted. Installation instruction remains exactly the same (run the command `./install_sct` when you are in your `sct_custom` folder). Errors or warnings may occurs  during installation but it will not be an issue for the good behavior of the fine-tuning pipeline. Note that this version of SCT is only designed for this pipeline and should not be used for anything else. 
 
-To get start, you need to have data that consists of input image and its corresponding segmentation masks, both in NIFTI format.
+To get started, you need to have data that consists of input image and its corresponding segmentation masks, both in NIFTI format.
 
 Before the preprocessing the data (MR images and masks) needs to be organized in as shown below :
 
@@ -50,23 +50,22 @@ This is explained in the paper Gros et al, 2018 (https://arxiv.org/pdf/1805.0634
 
 The step-by-step procedure is described in [Preprocessing_script.ipynb](https://github.com/nidebroux/lumbosacral_segmentation/tree/master/scripts/Preprocessing_script.ipynb).
 
+The following bullet points resume the procedure.
 
-The following bullet points would help to understand. First as it is mentioned before, we need to narrow our search area around the spinal cord. So, for that we need to find spinal cord centerline. It's done by using the following command from Spinal cord toolbox :
-- `sct_get_centerline`:   In order to have the best centerline detection we use the segmentation mask. By computing the center of mass on each slice of the segmentation we obtain the best centerline detection possible.
-
-
-Since, the orientation of the images could vary across datasets/centers, we need to systematically set the orientation of the input image, mask and centerline mask to Right-Left, Posterior-Anterior, Inferior-Superior (RPI):
+Since, the orientation of the images could vary across datasets/centers, we need to systematically set the orientation of the input image and mask to Right-Left, Posterior-Anterior, Inferior-Superior (RPI):
 
 ~~~
 sct_image -i IMAGE -set-orient RPI
 ~~~
 
-Then, resolution should be set to 0.5mm isotropic for all images, masks and centerline:
+Then, resolution should be set to 0.5mm isotropic for all images masks:
 ~~~
 sct_resample -i IMAGE -mm 0.5x0.5x0.5
 ~~~
 
-Next step consists in cropping the resampled image and mask around the resampled spinal cord centerline.
+- `sct_get_centerline`:   In order to have the best centerline detection we use the segmentation mask. By computing the center of mass on each slice of the segmentation we obtain the best centerline detection possible.
+
+Next step consists in cropping the resampled image and mask around the spinal cord centerline.
 
 
 Later we standardize the intensities of the cropped image such that similar intensities will have similar tissue meaning.
